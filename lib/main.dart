@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const DashboardScreen(),
-            initialRoute: RoutesName.registerScreen,
-      onGenerateRoute: AppRoutes.generateRoutes,
+      home: const DashboardScreen(),
+      // initialRoute: RoutesName.registerScreen,
+      // onGenerateRoute: AppRoutes.generateRoutes,
     );
   }
 }

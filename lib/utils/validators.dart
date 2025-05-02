@@ -1,4 +1,3 @@
-
 // name validators
 String? nameValidator(String? value) {
   if (value == null || value.trim().isEmpty) {
@@ -35,11 +34,12 @@ String? passwordValidator(String? value) {
     return 'Password must be at least 6 characters';
   }
 
-  final complexRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$');
+  final complexRegex = RegExp(
+      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#\$%^&*()_+\-=\[\]{}":\\"|,.<>\/?]{6,}$');
+  // RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$');
   if (!complexRegex.hasMatch(value)) {
-    return 'Pasword must contain letters and numbers';
+    return 'Password must contain letters and numbers';
   }
 
   return null;
 }
-

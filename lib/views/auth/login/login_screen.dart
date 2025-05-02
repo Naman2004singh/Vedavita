@@ -45,7 +45,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     height: screenHeight / 4.0,
                   ),
                   const Text(
-                    "Sign Up",
+                    "Sign In",
                     textAlign: TextAlign.center,
                     style: AppTextstyle.headingLargeW,
                   ),
