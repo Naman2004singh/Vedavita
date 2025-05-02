@@ -1,0 +1,39 @@
+class PostResponseModel {
+  final bool success;
+  final String message;
+  final int statusCode;
+  final PostData? data;
+  final String? improveData;
+
+  PostResponseModel({
+    required this.success,
+    required this.message,
+    required this.statusCode,
+    this.data,
+    this.improveData,
+  });
+
+  factory PostResponseModel.fromJson(Map<String, dynamic> json) {
+    return PostResponseModel(
+      success: json['success'] ?? false,
+      message: json['message'] ?? '',
+      statusCode: json['statusCode'] ?? 0,
+      data: json['data'] != null ? PostData.fromJson(json['data']) : null,
+      improveData: json['improve_data'],
+    );
+  }
+}
+
+class PostData {
+  final double skinPercentage;
+
+  PostData({
+    required this.skinPercentage,
+  });
+
+  factory PostData.fromJson(Map<String, dynamic> json) {
+    return PostData(
+      skinPercentage: (json['skin_percentage'] ?? 0).toDouble(),
+    );
+  }
+}
