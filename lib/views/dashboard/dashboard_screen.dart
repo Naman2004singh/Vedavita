@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vedavita/views/chatbot/chatbot_screen.dart';
 import 'package:vedavita/views/dashboard/widgets/dashboard_appBar.dart';
+import 'package:vedavita/views/dashboard/widgets/health_matric.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
@@ -28,9 +29,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             scale: 1,
           )),
       body: ListView(
-        children: [
-          const DashboardAppbar(),
-          ],
+        children: [const DashboardAppbar(), HealthMatric()],
       ),
     );
   }
