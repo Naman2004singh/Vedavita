@@ -24,6 +24,7 @@ dependencies:
   another_flushbar: ^1.12.30 # for creating custom message bar
   flutter_svg: ^2.1.0 
   flutter_markdown: ^0.7.7
+  intl: ^0.18.1
 
 #---------./ PACKAGES-------------#
 
