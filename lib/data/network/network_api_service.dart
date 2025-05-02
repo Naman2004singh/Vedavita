@@ -45,6 +45,42 @@ class NetworkApiService extends BaseApiService {
     return jsonResponse;
   }
 
+  // Post api for the file upload
+
+  Future<dynamic> uploadImageOnly(String url, File imageFile) async {
+    dynamic jsonResponse;
+    try {
+      final request = http.MultipartRequest('POST', Uri.parse(url));
+      
+      // Get file extension
+      // final fileExtension = extension(imageFile.path).replaceAll('.', '');
+      
+      // Add the image file
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'image', 
+          imageFile.path,
+          // ContentType(
+          //   'image',
+          //   fileExtension,
+          // ),
+        ),
+      );
+
+      // Send the request
+      final streamedResponse = await request.send().timeout(const Duration(seconds: 60));
+      
+      final response = await http.Response.fromStream(streamedResponse);
+      
+      jsonResponse = returnResponse(response);
+    } on SocketException {
+      throw NoInternetException('No internet connection');
+    } on TimeoutException {
+      throw RequestTimeOutException('Request timeout');
+    }
+    return jsonResponse;
+  }
+
   // Managing the status codes
 
   dynamic returnResponse(http.Response response) {
