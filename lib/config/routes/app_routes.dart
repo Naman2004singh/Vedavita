@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vedavita/config/components/naviagtion.dart';
 import 'package:vedavita/config/routes/routes_name.dart';
 import 'package:vedavita/views/Image%20analysier/image_analyse.dart';
 import 'package:vedavita/views/PROM%20screen/prom_screen.dart';
@@ -23,6 +24,10 @@ class AppRoutes {
         );
 
         // navigation screens
+        case RoutesName.navigationScreen:
+        return MaterialPageRoute(
+          builder: (context) => const AppNavigation(),
+        );
       case RoutesName.dashboardScreen:
         return MaterialPageRoute(
           builder: (context) => const DashboardScreen(),

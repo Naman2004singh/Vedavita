@@ -6,7 +6,7 @@ import 'package:vedavita/utils/app_colors.dart';
 import 'package:vedavita/utils/app_constants.dart';
 import 'package:vedavita/utils/app_strings.dart';
 import 'package:vedavita/utils/app_textstyle.dart';
-import 'package:vedavita/views/auth/register/register_button.dart';
+import 'package:vedavita/views/auth/register/widgets/register_button.dart';
 import 'package:vedavita/views/auth/register/textData.dart';
 import 'package:vedavita/views/auth/register/widgets/email_input.dart';
 import 'package:vedavita/views/auth/register/widgets/google_button.dart';

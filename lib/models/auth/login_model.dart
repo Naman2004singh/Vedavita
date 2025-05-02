@@ -14,7 +14,8 @@ class LoginResponse {
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
       statusCode: json['statusCode'],
-      data: Data.fromJson(json['data']),
+      // data: Data.fromJson(json['data']),
+        data: json['data'] != null ? Data.fromJson(json['data']) : null,
       message: json['message'],
       success: json['success'],
     );
@@ -34,9 +35,10 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      user: User.fromJson(json['user']),
-      accessToken: json['accessToken'],
-      refreshToken: json['refreshToken'],
+      // user: User.fromJson(json['user']),
+      user: json['user'] != null ? User.fromJson(json['user']) : null,
+      accessToken: json['accessToken'] ?? '',
+      refreshToken: json['refreshToken'] ?? '',
     );
   }
 }
@@ -78,9 +80,12 @@ class User {
       gender: json['gender'],
       wearableConnected: json['wearableConnected'],
       age: json['age'],
-      contactInfo: ContactInfo.fromJson(json['contactInfo']),
-      emergencyContact: EmergencyContact.fromJson(json['emergencyContact']),
-      basicInfo: BasicInfo.fromJson(json['basicInfo']),
+      // contactInfo: ContactInfo.fromJson(json['contactInfo']),
+      // emergencyContact: EmergencyContact.fromJson(json['emergencyContact']),
+      // basicInfo: BasicInfo.fromJson(json['basicInfo']),
+      contactInfo: json['contactInfo'] != null ? ContactInfo.fromJson(json['contactInfo']) : null,
+    emergencyContact: json['emergencyContact'] != null ? EmergencyContact.fromJson(json['emergencyContact']) : null,
+    basicInfo: json['basicInfo'] != null ? BasicInfo.fromJson(json['basicInfo']) : null,
     );
   }
 }
@@ -137,7 +142,10 @@ class BasicInfo {
       height: json['height'],
       weight: json['weight'],
       bloodGroup: json['bloodGroup'],
-      allergies: List<String>.from(json['allergies']),
+      // allergies: List<String>.from(json['allergies']),
+      allergies: json['allergies'] != null
+        ? List<String>.from(json['allergies'])
+        : [],
     );
   }
 }

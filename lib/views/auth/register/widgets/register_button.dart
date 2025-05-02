@@ -50,13 +50,8 @@ class RegisterButton extends ConsumerWidget {
                       ref.invalidate(passwordProviderRegister);
 
                       // navigate to login screen
-                      // Navigator.pushNamed(context, RoutesName.loginScreen);
+                      Navigator.pushNamed(context, RoutesName.loginScreen);
                       // Navigator.pushNamed(context, RoutesName.dashboardScreen);
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        RoutesName.dashboardScreen,
-                        (route) => false,
-                      );
                     } else {
                       FlushBarHelper.flushBarErrorMessage(
                           response.message ?? "Registration failed", context);

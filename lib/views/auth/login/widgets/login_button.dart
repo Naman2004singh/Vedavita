@@ -42,7 +42,11 @@ class LoginButton extends ConsumerWidget {
                       ref.invalidate(passwordProviderLogin);
 
                       // navigate to login screen
-                      Navigator.pushNamed(context, RoutesName.dashboardScreen);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RoutesName.navigationScreen,
+                        (route) => false,
+                      );
                     } else {
                       FlushBarHelper.flushBarErrorMessage(
                           response.message ?? "Login failed", context);

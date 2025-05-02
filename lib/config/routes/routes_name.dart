@@ -8,5 +8,6 @@ class RoutesName {
   static const String profileScreen = '/profileScreen';
   static const String imageAnalyseScreen = '/imageAnalyseScreen';
   static const String emergencyScreen = '/emergencyScreen';
+  static const String navigationScreen = '/navigationScreen';
 
 }
