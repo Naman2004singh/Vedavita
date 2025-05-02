@@ -20,4 +20,5 @@ class AppColors {
   static const Color redColor = Color(0xffF44336);
   static const Color lightBlueColor = Color(0xff94C9FE);
   static const Color transparentColor = Colors.transparent;
+  static const Color lightChatColor = Color(0xffE6F5F8);
 }

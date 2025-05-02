@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vedavita/models/chat_message.dart';
-import 'package:flutter_markdown/flutter_markdown.dart'; 
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:vedavita/utils/app_colors.dart';
+import 'package:vedavita/utils/app_textstyle.dart';
 
 class ChatBubble extends StatelessWidget {
   final ChatMessage message;
@@ -21,9 +23,8 @@ class ChatBubble extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: message.isUser
-              ? Colors.teal
-              : Colors.grey.shade200,
+          color:
+              message.isUser ? AppColors.mainColor : AppColors.lightChatColor,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -32,17 +33,16 @@ class ChatBubble extends StatelessWidget {
             message.isUser
                 ? Text(
                     message.text,
-                    style: const TextStyle(color: Colors.white),
+                    style: AppTextstyle.text17W,
                   )
                 : MarkdownBody(
                     data: message.text,
                     styleSheet: MarkdownStyleSheet(
-                      p: const TextStyle(color: Colors.black87),
-                      strong: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
-                      listBullet: const TextStyle(color: Colors.black87),
+                      p: AppTextstyle.text17B,
+                      strong: AppTextstyle.text17B,
+                      listBullet: AppTextstyle.text17B,
                     ),
                   ),
-            
             const SizedBox(height: 4),
             Text(
               _formatTime(message.timestamp),

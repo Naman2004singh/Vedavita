@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vedavita/providers/chat_provider.dart';
+import 'package:vedavita/utils/app_colors.dart';
 import 'package:vedavita/views/chatbot/widget/chat_bubble.dart';
 import 'package:vedavita/views/chatbot/widget/chat_input.dart';
 import 'package:vedavita/views/chatbot/widget/empty_placeholder.dart';
@@ -12,7 +13,7 @@ class ChatScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chatState = ref.watch(chatProvider);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Health Assistant'),
@@ -31,7 +32,7 @@ class ChatScreen extends ConsumerWidget {
           // Error message if any
           if (chatState.error != null)
             ErrorBanner(errorMessage: chatState.error!),
-          
+
           // Chat messages
           Expanded(
             child: chatState.messages.isEmpty
@@ -45,11 +46,18 @@ class ChatScreen extends ConsumerWidget {
                     },
                   ),
           ),
-          
+
           // Loading indicator
           if (chatState.isLoading)
-            const LinearProgressIndicator(),
-          
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: LinearProgressIndicator(
+                minHeight: 3,
+                color: AppColors.mainMediumColor,
+                backgroundColor: Colors.transparent,
+              ),
+            ),
+
           // Chat input
           const ChatInput(),
         ],

@@ -43,4 +43,16 @@ class AppTextstyle {
       fontSize: 13.0,
       fontWeight: FontWeight.w400,
       color: AppColors.blackColor);
+
+  // for chat specific
+  static const TextStyle text17W = TextStyle(
+      fontFamily: " Manrope",
+      fontSize: 17.0,
+      fontWeight: FontWeight.w400,
+      color: AppColors.whiteColor);
+  static const TextStyle text17B = TextStyle(
+      fontFamily: " Manrope",
+      fontSize: 17.0,
+      fontWeight: FontWeight.w400,
+      color: AppColors.blackColor);
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vedavita/providers/chat_provider.dart';
+import 'package:vedavita/utils/app_colors.dart';
 
 class ErrorBanner extends ConsumerWidget {
   final String errorMessage;
@@ -17,12 +18,12 @@ class ErrorBanner extends ConsumerWidget {
       padding: const EdgeInsets.all(8),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: Colors.red.shade800),
+          const Icon(Icons.error_outline, color: AppColors.redColor),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               errorMessage,
-              style: TextStyle(color: Colors.red.shade800),
+              style: const TextStyle(color: AppColors.redColor),
             ),
           ),
           IconButton(
