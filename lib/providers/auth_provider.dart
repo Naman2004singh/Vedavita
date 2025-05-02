@@ -22,3 +22,7 @@ final passwordProviderLogin = StateProvider<String?>(
 final loginLodingProvider = StateProvider<bool>(
   (ref) => false,
 );
+
+
+// navigation provider of navigation bar
+final navigationProvider = StateProvider<int>((ref) => 0);

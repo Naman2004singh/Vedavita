@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vedavita/config/components/naviagtion.dart';
 import 'package:vedavita/config/routes/app_routes.dart';
 import 'package:vedavita/config/routes/routes_name.dart';
 import 'package:vedavita/views/dashboard/dashboard_screen.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const DashboardScreen(),
+      home: const AppNavigation(),
       // initialRoute: RoutesName.registerScreen,
       // onGenerateRoute: AppRoutes.generateRoutes,
     );
