@@ -4,15 +4,15 @@ class ChatResponseModel {
   final String message;
   final bool success;
 
-  ChatResponse({
+  ChatResponseModel({
     required this.statusCode,
     required this.data,
     required this.message,
     required this.success,
   });
 
-  factory ChatResponse.fromJson(Map<String, dynamic> json) {
-    return ChatResponse(
+  factory ChatResponseModel.fromJson(Map<String, dynamic> json) {
+    return ChatResponseModel(
       statusCode: json['statusCode'],
       data: json['data'],
       message: json['message'],
