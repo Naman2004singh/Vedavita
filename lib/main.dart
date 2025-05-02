@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vedavita/views/dashboard/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const DashboardScreen(),
     );
   }
 }
