@@ -1,14 +1,14 @@
 class LoginResponse {
-  final int statusCode;
-  final Data data;
-  final String message;
-  final bool success;
+  int? statusCode;
+  Data? data;
+  String? message;
+  bool? success;
 
   LoginResponse({
-    required this.statusCode,
-    required this.data,
-    required this.message,
-    required this.success,
+    this.statusCode,
+    this.data,
+    this.message,
+    this.success,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
@@ -22,14 +22,14 @@ class LoginResponse {
 }
 
 class Data {
-  final User user;
-  final String accessToken;
-  final String refreshToken;
+  User? user;
+  String? accessToken;
+  String? refreshToken;
 
   Data({
-    required this.user,
-    required this.accessToken,
-    required this.refreshToken,
+    this.user,
+    this.accessToken,
+    this.refreshToken,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) {
@@ -42,30 +42,30 @@ class Data {
 }
 
 class User {
-  final String id;
-  final String fullName;
-  final String email;
-  final String role;
-  final String profilePicture;
-  final String gender;
-  final bool wearableConnected;
-  final int age;
-  final ContactInfo contactInfo;
-  final EmergencyContact emergencyContact;
-  final BasicInfo basicInfo;
+  String? id;
+  String? fullName;
+  String? email;
+  String? role;
+  String? profilePicture;
+  String? gender;
+  bool? wearableConnected;
+  int? age;
+  ContactInfo? contactInfo;
+  EmergencyContact? emergencyContact;
+  BasicInfo? basicInfo;
 
   User({
-    required this.id,
-    required this.fullName,
-    required this.email,
-    required this.role,
-    required this.profilePicture,
-    required this.gender,
-    required this.wearableConnected,
-    required this.age,
-    required this.contactInfo,
-    required this.emergencyContact,
-    required this.basicInfo,
+    this.id,
+    this.fullName,
+    this.email,
+    this.role,
+    this.profilePicture,
+    this.gender,
+    this.wearableConnected,
+    this.age,
+    this.contactInfo,
+    this.emergencyContact,
+    this.basicInfo,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -86,12 +86,12 @@ class User {
 }
 
 class ContactInfo {
-  final String phone;
-  final String address;
+  String? phone;
+  String? address;
 
   ContactInfo({
-    required this.phone,
-    required this.address,
+    this.phone,
+    this.address,
   });
 
   factory ContactInfo.fromJson(Map<String, dynamic> json) {
@@ -103,12 +103,12 @@ class ContactInfo {
 }
 
 class EmergencyContact {
-  final String name;
-  final String phone;
+  String? name;
+  String? phone;
 
   EmergencyContact({
-    required this.name,
-    required this.phone,
+    this.name,
+    this.phone,
   });
 
   factory EmergencyContact.fromJson(Map<String, dynamic> json) {
@@ -120,16 +120,16 @@ class EmergencyContact {
 }
 
 class BasicInfo {
-  final int height;
-  final int weight;
-  final String bloodGroup;
-  final List<String> allergies;
+  int? height;
+  int? weight;
+  String? bloodGroup;
+  List<String>? allergies;
 
   BasicInfo({
-    required this.height,
-    required this.weight,
-    required this.bloodGroup,
-    required this.allergies,
+    this.height,
+    this.weight,
+    this.bloodGroup,
+    this.allergies,
   });
 
   factory BasicInfo.fromJson(Map<String, dynamic> json) {

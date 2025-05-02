@@ -1,14 +1,14 @@
 class RegisterResponse {
-  final int statusCode;
-  final UserData data;
-  final String message;
-  final bool success;
+  int? statusCode;
+  UserData? data;
+  String? message;
+  bool? success;
 
   RegisterResponse({
-    required this.statusCode,
-    required this.data,
-    required this.message,
-    required this.success,
+    this.statusCode,
+    this.data,
+    this.message,
+    this.success,
   });
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
@@ -19,27 +19,36 @@ class RegisterResponse {
       success: json['success'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'statusCode': statusCode,
+      'data': data?.toJson(),
+      'message': message,
+      'success': success,
+    };
+  }
 }
 
 class UserData {
-  final String id;
-  final String fullName;
-  final String email;
-  final String role;
-  final String profilePicture;
-  final String gender;
-  final bool wearableConnected;
-  final BasicInfo basicInfo;
+  String? id;
+  String? fullName;
+  String? email;
+  String? role;
+  String? profilePicture;
+  String? gender;
+  bool? wearableConnected;
+  BasicInfo? basicInfo;
 
   UserData({
-    required this.id,
-    required this.fullName,
-    required this.email,
-    required this.role,
-    required this.profilePicture,
-    required this.gender,
-    required this.wearableConnected,
-    required this.basicInfo,
+    this.id,
+    this.fullName,
+    this.email,
+    this.role,
+    this.profilePicture,
+    this.gender,
+    this.wearableConnected,
+    this.basicInfo,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -54,19 +63,32 @@ class UserData {
       basicInfo: BasicInfo.fromJson(json['basicInfo']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'fullName': fullName,
+      'email': email,
+      'role': role,
+      'profilePicture': profilePicture,
+      'gender': gender,
+      'wearableConnected': wearableConnected,
+      'basicInfo': basicInfo?.toJson(),
+    };
+  }
 }
 
 class BasicInfo {
-  final int height;
-  final int weight;
-  final String? bloodGroup;
-  final List<String> allergies;
+  int? height;
+  int? weight;
+  String? bloodGroup;
+  List<String>? allergies;
 
   BasicInfo({
-    required this.height,
-    required this.weight,
+    this.height,
+    this.weight,
     this.bloodGroup,
-    required this.allergies,
+    this.allergies,
   });
 
   factory BasicInfo.fromJson(Map<String, dynamic> json) {
@@ -76,5 +98,14 @@ class BasicInfo {
       bloodGroup: json['bloodGroup'],
       allergies: List<String>.from(json['allergies']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'height': height,
+      'weight': weight,
+      'bloodGroup': bloodGroup,
+      'allergies': allergies,
+    };
   }
 }
