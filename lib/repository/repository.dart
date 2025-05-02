@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:vedavita/data/network/network_api_service.dart';
 import 'package:vedavita/models/auth/login_model.dart';
 import 'package:vedavita/models/auth/register_model.dart';
@@ -24,6 +26,17 @@ class Repository {
       AppUrls.chatbotUrl,
       {'text': message},
     );
+    return ChatResponseModel.fromJson(response);
+  }
+
+
+  // image api
+  Future<ChatResponseModel> uploadImage(File imageFile) async {
+    final response = await _api.uploadImageOnly(
+      AppUrls.uploadImageUrl,
+      imageFile,
+    );
+    
     return ChatResponseModel.fromJson(response);
   }
 }

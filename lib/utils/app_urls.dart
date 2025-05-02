@@ -11,4 +11,6 @@ class AppUrls {
       "https://vedavite-backend-vrgl.onrender.com/api/v1/user/get-user";
   static const chatbotUrl =
       "https://vedavite-backend-vrgl.onrender.com/api/v1/chatBot";
+  static const uploadImageUrl =
+      "https://vedavite-backend-vrgl.onrender.com/api/v1/ml/scan-image";
 }
