@@ -37,7 +37,7 @@ class AppRoutes {
         );
       case RoutesName.imageAnalyseScreen:
         return MaterialPageRoute(
-          builder: (context) => const ImageAnalyser(),
+          builder: (context) => const ImageAnalyse(),
         );
       case RoutesName.emergencyScreen:
         return MaterialPageRoute(

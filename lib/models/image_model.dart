@@ -3,14 +3,12 @@ class PostResponseModel {
   final String message;
   final int statusCode;
   final PostData? data;
-  final String? improveData;
 
   PostResponseModel({
     required this.success,
     required this.message,
     required this.statusCode,
     this.data,
-    this.improveData,
   });
 
   factory PostResponseModel.fromJson(Map<String, dynamic> json) {
@@ -19,21 +17,38 @@ class PostResponseModel {
       message: json['message'] ?? '',
       statusCode: json['statusCode'] ?? 0,
       data: json['data'] != null ? PostData.fromJson(json['data']) : null,
-      improveData: json['improve_data'],
     );
   }
 }
 
 class PostData {
-  final double skinPercentage;
+  final String id;
+  final String patient;
+  final String image;
+  final double result;
+  final String createdAt;
+  final String updatedAt;
+  final int v;
 
   PostData({
-    required this.skinPercentage,
+    required this.id,
+    required this.patient,
+    required this.image,
+    required this.result,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.v,
   });
 
   factory PostData.fromJson(Map<String, dynamic> json) {
     return PostData(
-      skinPercentage: (json['skin_percentage'] ?? 0).toDouble(),
+      id: json['_id'] ?? '',
+      patient: json['patient'] ?? '',
+      image: json['image'] ?? '',
+      result: (json['result'] ?? 0).toDouble(),
+      createdAt: json['createdAt'] ?? '',
+      updatedAt: json['updatedAt'] ?? '',
+      v: json['__v'] ?? 0,
     );
   }
 }

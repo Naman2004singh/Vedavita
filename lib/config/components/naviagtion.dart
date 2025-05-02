@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vedavita/providers/auth_provider.dart';
 import 'package:vedavita/utils/app_colors.dart';
-import 'package:vedavita/views/Image%20analysier/image_analyse.dart';
 import 'package:vedavita/views/PROM%20screen/prom_screen.dart';
+import 'package:vedavita/views/Image analysier/image_analyse.dart';
 import 'package:vedavita/views/Profile/profile_screen.dart';
 import 'package:vedavita/views/dashboard/dashboard_screen.dart';
 import 'package:vedavita/views/emergency%20contact/emergency_contact_screen.dart';
@@ -19,7 +19,7 @@ class AppNavigation extends ConsumerWidget {
         index: selectedIndex,
         children: const [
           DashboardScreen(),
-          ImageAnalyser(),
+          ImageAnalyse(),
           EmergencyContactScreen(),
           PromScreen(),
           ProfileScreen(),
