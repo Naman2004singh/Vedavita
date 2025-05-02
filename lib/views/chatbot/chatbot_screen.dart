@@ -16,7 +16,21 @@ class ChatScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Health Assistant'),
+        backgroundColor: AppColors.transparentColor,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/chatbot.png",
+              width: 40,
+              height: 40,
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            const Text('Health Assistant')
+          ],
+        ),
         centerTitle: true,
         actions: [
           IconButton(
