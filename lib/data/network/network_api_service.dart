@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:vedavita/data/exception/app_exceptions.dart';
 import 'package:vedavita/data/network/base_api_service.dart';
 import 'package:http/http.dart' as http;
+import 'package:vedavita/data/network/token_storage.dart';
 
 class NetworkApiService extends BaseApiService {
   // GET api call
@@ -37,6 +38,16 @@ class NetworkApiService extends BaseApiService {
           .timeout(const Duration(seconds: 50));
 
       jsonResponse = returnResponse(response);
+
+      // storing the token
+      if (jsonResponse['accessToken'] != null &&
+          jsonResponse['refreshToken'] != null) {
+        await TokenStorage.storeTokens(
+          jsonResponse['accessToken'],
+          jsonResponse['refreshToken'],
+        );
+        print("jsonResponse :${jsonResponse}");
+      }
     } on SocketException {
       throw NoInternetException('message');
     } on TimeoutException {
@@ -50,15 +61,26 @@ class NetworkApiService extends BaseApiService {
   Future<dynamic> uploadImageOnly(String url, File imageFile) async {
     dynamic jsonResponse;
     try {
-      final request = http.MultipartRequest('POST', Uri.parse(url));
-      
+      final request = http.MultipartRequest(
+          'POST',
+          Uri.parse(
+            url,
+          ));
+
+      final token = await TokenStorage.getAccessToken();
+      if (token != null && token.isNotEmpty) {
+        request.headers['Authorization'] = 'Bearer $token';
+        print('Image upload using token: $token');
+      } else {
+        print('No token found for image upload');
+      }
       // Get file extension
       // final fileExtension = extension(imageFile.path).replaceAll('.', '');
-      
+
       // Add the image file
       request.files.add(
         await http.MultipartFile.fromPath(
-          'image', 
+          'image',
           imageFile.path,
           // ContentType(
           //   'image',
@@ -67,11 +89,14 @@ class NetworkApiService extends BaseApiService {
         ),
       );
 
+      print('Request headers: ${request.headers}');
+
       // Send the request
-      final streamedResponse = await request.send().timeout(const Duration(seconds: 60));
-      
+      final streamedResponse =
+          await request.send().timeout(const Duration(seconds: 60));
+
       final response = await http.Response.fromStream(streamedResponse);
-      
+
       jsonResponse = returnResponse(response);
     } on SocketException {
       throw NoInternetException('No internet connection');

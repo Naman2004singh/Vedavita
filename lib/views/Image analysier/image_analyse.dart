@@ -22,14 +22,42 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
     });
   }
 
+  Future<void> _showImageSelect() async {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text('Take a photo'),
+              onTap: () async {
+                Navigator.pop(context);
+                await _getImage(ImageSource.camera);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Choose from gallery'),
+              onTap: () async {
+                Navigator.pop(context);
+                await _getImage(ImageSource.gallery);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   // Pick image from gallery
-  Future<void> _pickImage() async {
+  Future<void> _getImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 80, // Optional: reduce image quality to save bandwidth
     );
-    
+
     if (image != null) {
       ref.read(imageUploadProvider.notifier).setImage(File(image.path));
     }
@@ -39,18 +67,19 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
   Widget build(BuildContext context) {
     // Watch the image upload state
     final uploadState = ref.watch(imageUploadProvider);
-    
+
     // Listen to state changes
     ref.listen<ImageUploadState>(
       imageUploadProvider,
       (previous, current) {
         // Show error if any
-        if (current.errorMessage != null && previous?.errorMessage != current.errorMessage) {
+        if (current.errorMessage != null &&
+            previous?.errorMessage != current.errorMessage) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(current.errorMessage!)),
           );
         }
-        
+
         // Navigate to success screen if upload was successful
         if (current.response != null && current.response!.success) {
           Navigator.pushReplacement(
@@ -75,7 +104,7 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
             // Image preview
             Expanded(
               child: GestureDetector(
-                onTap: _pickImage,
+                onTap: _showImageSelect,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -111,17 +140,18 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Upload button
             ElevatedButton(
-              onPressed: uploadState.isLoading || uploadState.selectedImage == null
-                  ? null
-                  : () {
-                      // Call upload image method
-                      ref.read(imageUploadProvider.notifier).uploadImage();
-                    },
+              onPressed:
+                  uploadState.isLoading || uploadState.selectedImage == null
+                      ? null
+                      : () {
+                          // Call upload image method
+                          ref.read(imageUploadProvider.notifier).uploadImage();
+                        },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 disabledBackgroundColor: Colors.grey[300],
