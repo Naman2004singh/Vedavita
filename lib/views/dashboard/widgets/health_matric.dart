@@ -6,6 +6,7 @@ import 'package:vedavita/utils/app_constants.dart';
 import 'package:vedavita/utils/app_textstyle.dart';
 import 'package:vedavita/views/dashboard/widgets/blood%20pressure/bp_screen.dart';
 import 'package:vedavita/views/dashboard/widgets/heart/heart_dahboard.dart';
+import 'package:vedavita/views/dashboard/widgets/spo2/spo2_screen.dart';
 
 class HealthMatric extends StatelessWidget {
   const HealthMatric({super.key});
@@ -58,8 +59,17 @@ class HealthMatric extends StatelessWidget {
                 const SizedBox(
                   width: 20.0,
                 ),
-                SvgPicture.asset(
-                  "assets/logo/spo2.svg",
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>const Sp02Chart(),
+                        ));
+                  },
+                  child: SvgPicture.asset(
+                    "assets/logo/spo2.svg",
+                  ),
                 ),
                 const SizedBox(
                   width: 20.0,
