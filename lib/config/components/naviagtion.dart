@@ -14,64 +14,58 @@ class AppNavigation extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(navigationProvider);
-    return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: const [
-          DashboardScreen(),
-          ImageAnalyse(),
-          EmergencyContactScreen(),
-          PromScreen(),
-          ProfileScreen(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: AppColors.mainColor,
-        selectedIconTheme: const IconThemeData(
-          color: AppColors.mainColor,
+
+    return PopScope(
+      canPop: selectedIndex == 0,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (!didPop && selectedIndex != 0) {
+          ref.read(navigationProvider.notifier).update((state) => 0);
+        }
+      },
+      child: Scaffold(
+        body: IndexedStack(
+          index: selectedIndex,
+          children: const [
+            DashboardScreen(),
+            ImageAnalyse(),
+            EmergencyContactScreen(),
+            PromScreen(),
+            ProfileScreen(),
+          ],
         ),
-        unselectedItemColor: AppColors.blackColor,
-        currentIndex: selectedIndex,
-        onTap: (index) {
-          ref.read(navigationProvider.notifier).update((state) => index);
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_filled,
-              color: AppColors.blackColor,
-            ),
-            label: 'Dashboard',
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: AppColors.mainColor,
+          selectedIconTheme: const IconThemeData(
+            color: AppColors.mainColor,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.camera_alt,
-              color: AppColors.blackColor,
+          unselectedItemColor: AppColors.blackColor,
+          currentIndex: selectedIndex,
+          onTap: (index) {
+            ref.read(navigationProvider.notifier).update((state) => index);
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_filled, color: AppColors.blackColor),
+              label: 'Dashboard',
             ),
-            label: 'Image Analyse',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.phone,
-              color: AppColors.blackColor,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.camera_alt, color: AppColors.blackColor),
+              label: 'Image Analyse',
             ),
-            label: 'Emergency',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.assignment,
-              color: AppColors.blackColor,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.phone, color: AppColors.blackColor),
+              label: 'Emergency',
             ),
-            label: 'PROM',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              color: AppColors.blackColor,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.assignment, color: AppColors.blackColor),
+              label: 'PROM',
             ),
-            label: 'Profile',
-          ),
-        ],
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person, color: AppColors.blackColor),
+              label: 'Profile',
+            ),
+          ],
+        ),
       ),
     );
   }
