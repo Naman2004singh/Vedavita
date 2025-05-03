@@ -9,46 +9,51 @@ class CustomContainer extends StatelessWidget {
   final LinearGradient linearGradient;
   final String assetName;
   final String boxText;
+  final VoidCallback? onTap;
   const CustomContainer({
     super.key,
     required this.assetName,
     required this.boxText,
     required this.linearGradient,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      decoration: BoxDecoration(
-        gradient: linearGradient,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Column(
-        children: [
-          SvgPicture.asset(assetName),
-          const SizedBox(
-            height: 40.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                boxText,
-                style: AppTextstyle.bodyLargeB,
-              ),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 25,
-                    color: AppColors.blackColor,
-                  ))
-            ],
-          )
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 200,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        decoration: BoxDecoration(
+          gradient: linearGradient,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Column(
+          children: [
+            SvgPicture.asset(assetName),
+            const SizedBox(
+              height: 40.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  boxText,
+                  style: AppTextstyle.bodyLargeB,
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 25,
+                      color: AppColors.blackColor,
+                    ))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

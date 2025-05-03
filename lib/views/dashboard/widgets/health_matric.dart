@@ -3,22 +3,23 @@ import 'package:vedavita/config/components/custom_container.dart';
 import 'package:vedavita/utils/app_colors.dart';
 import 'package:vedavita/utils/app_constants.dart';
 import 'package:vedavita/utils/app_textstyle.dart';
+import 'package:vedavita/views/dashboard/widgets/heart/heart_dahboard.dart';
 
 class HealthMatric extends StatelessWidget {
   const HealthMatric({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.all(AppConstants.textFieldBorder),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Health Metrics",
             style: AppTextstyle.bodyLargeB,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           SingleChildScrollView(
@@ -29,6 +30,9 @@ class HealthMatric extends StatelessWidget {
                   assetName: "assets/images/barChart.svg",
                   boxText: "Recovery Score",
                   linearGradient: AppColors.greenGradient,
+                  onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context) => const HeartRateDashboardPage()));
+                  },
                 ),
                 SizedBox(
                   width: 20,
@@ -37,6 +41,9 @@ class HealthMatric extends StatelessWidget {
                   assetName: "assets/images/heartRate.svg",
                   boxText: "Heart Rate",
                   linearGradient: AppColors.pinkGradient,
+                  onTap: () {
+                    
+                  },
                 ),
                 SizedBox(
                   width: 20,
@@ -45,6 +52,9 @@ class HealthMatric extends StatelessWidget {
                   assetName: "assets/images/sp02.svg",
                   boxText: "Spo2",
                   linearGradient: AppColors.yellowGradient,
+                  onTap: () {
+                    
+                  },
                 )
               ],
             ),

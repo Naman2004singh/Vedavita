@@ -21,18 +21,18 @@ class Repository {
   Future<LoginResponse> loginApi(dynamic data) async {
     final response = await _api.postApi(AppUrls.loginUrl, data);
     final loginResponse = LoginResponse.fromJson(response);
-    
+
     final dataField = loginResponse.data;
 
-  if (dataField != null &&
-      dataField.accessToken != null &&
-      dataField.refreshToken != null) {
-    await TokenStorage.storeTokens(
-      dataField.accessToken!,
-      dataField.refreshToken!,
-    );
-    print("loginResponse: $loginResponse");
-  }
+    if (dataField != null &&
+        dataField.accessToken != null &&
+        dataField.refreshToken != null) {
+      await TokenStorage.storeTokens(
+        dataField.accessToken!,
+        dataField.refreshToken!,
+      );
+      print("loginResponse: $loginResponse");
+    }
 
     return loginResponse;
   }
@@ -58,6 +58,9 @@ class Repository {
   // get heart rate data
   Future<HeartRateResponse> getHeartRateData() async {
     final response = await _api.getApi(AppUrls.heratRateUrl);
-    return HeartRateResponse.fromJson(response);
+
+    final heartRateResponse = HeartRateResponse.fromJson(response);
+    print(heartRateResponse);
+    return heartRateResponse;
   }
 }
