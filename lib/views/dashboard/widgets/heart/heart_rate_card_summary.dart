@@ -6,7 +6,7 @@ import 'package:vedavita/views/dashboard/widgets/heart/date_formetter.dart';
 class HeartRateDataTable extends StatelessWidget {
   final List<HeartRateEntry> heartRateData;
 
-  const HeartRateDataTable({Key? key, required this.heartRateData}) : super(key: key);
+  const HeartRateDataTable({super.key, required this.heartRateData});
 
   @override
   Widget build(BuildContext context) {

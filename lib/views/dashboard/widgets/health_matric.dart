@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vedavita/config/components/custom_container.dart';
 import 'package:vedavita/utils/app_colors.dart';
 import 'package:vedavita/utils/app_constants.dart';
@@ -11,7 +12,7 @@ class HealthMatric extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(AppConstants.textFieldBorder),
+      padding: const EdgeInsets.all(AppConstants.textFieldBorder),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,36 +27,70 @@ class HealthMatric extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                CustomContainer(
-                  assetName: "assets/images/barChart.svg",
-                  boxText: "Recovery Score",
-                  linearGradient: AppColors.greenGradient,
-                  onTap: (){
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => const HeartRateDashboardPage()));
-                  },
+                // CustomContainer(
+                //   assetName: "assets/images/barChart.svg",
+                //   boxText: "Recovery Score",
+                //   linearGradient: AppColors.greenGradient,
+                //   onTap: () {},
+                // ),
+                // const SizedBox(
+                //   width: 20,
+                // ),
+                SvgPicture.asset(
+                  "assets/logo/bp.svg",
                 ),
-                SizedBox(
-                  width: 20,
+                const SizedBox(
+                  width: 20.0,
                 ),
-                CustomContainer(
-                  assetName: "assets/images/heartRate.svg",
-                  boxText: "Heart Rate",
-                  linearGradient: AppColors.pinkGradient,
+                GestureDetector(
                   onTap: () {
-                    
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HeartRateDashboardPage(),
+                        ));
                   },
+                  child: SvgPicture.asset(
+                    "assets/logo/heart.svg",
+                  ),
                 ),
-                SizedBox(
-                  width: 20,
+                const SizedBox(
+                  width: 20.0,
                 ),
-                CustomContainer(
-                  assetName: "assets/images/sp02.svg",
-                  boxText: "Spo2",
-                  linearGradient: AppColors.yellowGradient,
-                  onTap: () {
-                    
-                  },
-                )
+                SvgPicture.asset(
+                  "assets/logo/spo2.svg",
+                ),
+                const SizedBox(
+                  width: 20.0,
+                ),
+                SvgPicture.asset(
+                  "assets/logo/temp.svg",
+                ),
+                const SizedBox(
+                  width: 20.0,
+                ),
+
+                // CustomContainer(
+                //   assetName: "assets/images/heartRate.svg",
+                //   boxText: "Heart Rate",
+                //   linearGradient: AppColors.pinkGradient,
+                //   onTap: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) =>
+                //                 const HeartRateDashboardPage()));
+                //   },
+                // ),
+                // const SizedBox(
+                //   width: 20,
+                // ),
+                // CustomContainer(
+                //   assetName: "assets/images/sp02.svg",
+                //   boxText: "Spo2",
+                //   linearGradient: AppColors.yellowGradient,
+                //   onTap: () {},
+                // )
               ],
             ),
           )
