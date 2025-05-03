@@ -13,4 +13,14 @@ class AppUrls {
       "https://vedavite-backend-vrgl.onrender.com/api/v1/chatBot";
   static const uploadImageUrl =
       "https://vedavite-backend-vrgl.onrender.com/api/v1/ml/scan-image";
-}
+
+  
+  static const heratRateUrl = 
+      "https://vedavite-backend-vrgl.onrender.com/api/v1/parameters/heart-rate";
+  static const temperatureUrl = 
+      "https://vedavite-backend-vrgl.onrender.com/api/v1/parameters/temperature";
+  static const bloodPressureUrl = 
+      "https://vedavite-backend-vrgl.onrender.com/api/v1/parameters/blood-pressure";
+    static const spo2Url = 
+      "https://vedavite-backend-vrgl.onrender.com/api/v1/parameters/oxygen-saturation";
+  }

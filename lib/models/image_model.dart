@@ -1,22 +1,22 @@
 class PostResponseModel {
-  final bool success;
-  final String message;
   final int statusCode;
   final PostData? data;
+  final String message;
+  final bool success;
 
   PostResponseModel({
-    required this.success,
-    required this.message,
     required this.statusCode,
-    this.data,
+    required this.data,
+    required this.message,
+    required this.success,
   });
 
   factory PostResponseModel.fromJson(Map<String, dynamic> json) {
     return PostResponseModel(
-      success: json['success'] ?? false,
-      message: json['message'] ?? '',
       statusCode: json['statusCode'] ?? 0,
       data: json['data'] != null ? PostData.fromJson(json['data']) : null,
+      message: json['message'] ?? '',
+      success: json['success'] ?? false,
     );
   }
 }

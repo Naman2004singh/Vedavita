@@ -16,12 +16,13 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
   @override
   void initState() {
     super.initState();
+    // Reset state when screen is first loaded
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Reset state when screen is first loaded
       ref.read(imageUploadProvider.notifier).resetState();
     });
   }
 
+  // Show image selection options (camera or gallery)
   Future<void> _showImageSelect() async {
     showModalBottomSheet(
       context: context,
@@ -50,11 +51,11 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
     );
   }
 
-  // Pick image from gallery
+  // Pick image from the specified source (gallery or camera)
   Future<void> _getImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(
-      source: ImageSource.gallery,
+      source: source,
       imageQuality: 80, // Optional: reduce image quality to save bandwidth
     );
 
@@ -65,37 +66,32 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
 
   @override
   Widget build(BuildContext context) {
-    // Watch the image upload state
     final uploadState = ref.watch(imageUploadProvider);
 
     // Listen to state changes
     ref.listen<ImageUploadState>(
       imageUploadProvider,
       (previous, current) {
-        // Show error if any
         if (current.errorMessage != null &&
             previous?.errorMessage != current.errorMessage) {
+          // Show error message if any
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(current.errorMessage!)),
           );
         }
 
-        // Navigate to success screen if upload was successful
-        if (current.response != null && current.response!.success) {
+        if (current.response?.success == true) {
+          // Navigate to success screen if image upload was successful
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
-              builder: (context) => const UploadSuccessScreen(),
-            ),
+            MaterialPageRoute(builder: (context) => const UploadSuccessScreen()),
           );
         }
       },
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Upload Image'),
-      ),
+      appBar: AppBar(title: const Text('Upload Image')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -129,10 +125,7 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
                               SizedBox(height: 16),
                               Text(
                                 'Tap to select an image',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                ),
+                                style: TextStyle(fontSize: 16, color: Colors.grey),
                               ),
                             ],
                           ),
@@ -145,13 +138,11 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
 
             // Upload button
             ElevatedButton(
-              onPressed:
-                  uploadState.isLoading || uploadState.selectedImage == null
-                      ? null
-                      : () {
-                          // Call upload image method
-                          ref.read(imageUploadProvider.notifier).uploadImage();
-                        },
+              onPressed: uploadState.isLoading || uploadState.selectedImage == null
+                  ? null
+                  : () {
+                      ref.read(imageUploadProvider.notifier).uploadImage();
+                    },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 disabledBackgroundColor: Colors.grey[300],
@@ -162,14 +153,7 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
                       children: [
                         Text('Uploading...'),
                         SizedBox(width: 10),
-                        SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.white,
-                          ),
-                        ),
+                        CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                       ],
                     )
                   : const Text(

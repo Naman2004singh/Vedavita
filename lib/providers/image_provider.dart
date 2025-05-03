@@ -49,7 +49,7 @@ class ImageUploadNotifier extends StateNotifier<ImageUploadState> {
     state = state.copyWith(selectedImage: image);
   }
 
-  // Upload image only
+  // Upload image
   Future<void> uploadImage() async {
     if (state.selectedImage == null) {
       state = state.copyWith(errorMessage: "Please select an image first");
@@ -57,24 +57,15 @@ class ImageUploadNotifier extends StateNotifier<ImageUploadState> {
     }
 
     try {
-      // Set loading state
-      state = state.copyWith(isLoading: true, errorMessage: null);
+      state = state.copyWith(isLoading: true);  // Set loading state
 
       // Call repository to upload image
       final response = await _repository.uploadImage(state.selectedImage!);
 
       // Update state with response
-      state = state.copyWith(
-        isLoading: false,
-        response: response,
-      );
-
+      state = state.copyWith(isLoading: false, response: response);
     } catch (e) {
-      // Handle error
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
   }
 

@@ -14,8 +14,12 @@ class NetworkApiService extends BaseApiService {
     dynamic jsonResponse;
 
     try {
+       final token = await TokenStorage.getAccessToken();
       final response =
-          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 50));
+          await http.get(Uri.parse(url), headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },).timeout(const Duration(seconds: 50));
       jsonResponse = returnResponse(response);
     } on SocketException {
       throw NoInternetException('message');
