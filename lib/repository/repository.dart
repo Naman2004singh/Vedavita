@@ -5,6 +5,7 @@ import 'package:vedavita/data/network/token_storage.dart';
 import 'package:vedavita/models/auth/login_model.dart';
 import 'package:vedavita/models/auth/register_model.dart';
 import 'package:vedavita/models/chat_response_model.dart';
+import 'package:vedavita/models/heartRate/heart_rate_response.dart';
 import 'package:vedavita/utils/app_urls.dart';
 
 class Repository {
@@ -52,5 +53,11 @@ class Repository {
     );
 
     return ChatResponseModel.fromJson(response);
+  }
+
+  // get heart rate data
+  Future<HeartRateResponse> getHeartRateData() async {
+    final response = await _api.getApi(AppUrls.heratRateUrl);
+    return HeartRateResponse.fromJson(response);
   }
 }
