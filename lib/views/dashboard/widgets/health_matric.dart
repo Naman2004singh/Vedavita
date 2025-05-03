@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:vedavita/utils/app_colors.dart';
 import 'package:vedavita/utils/app_constants.dart';
 import 'package:vedavita/utils/app_textstyle.dart';
+import 'package:vedavita/views/dashboard/widgets/blood%20pressure/bp_screen.dart';
 import 'package:vedavita/views/dashboard/widgets/heart/heart_dahboard.dart';
 
 class HealthMatric extends StatelessWidget {
@@ -27,17 +28,17 @@ class HealthMatric extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                // CustomContainer(
-                //   assetName: "assets/images/barChart.svg",
-                //   boxText: "Recovery Score",
-                //   linearGradient: AppColors.greenGradient,
-                //   onTap: () {},
-                // ),
-                // const SizedBox(
-                //   width: 20,
-                // ),
-                SvgPicture.asset(
-                  "assets/logo/bp.svg",
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LinearCharts(),
+                        ));
+                  },
+                  child: SvgPicture.asset(
+                    "assets/logo/bp.svg",
+                  ),
                 ),
                 const SizedBox(
                   width: 20.0,
