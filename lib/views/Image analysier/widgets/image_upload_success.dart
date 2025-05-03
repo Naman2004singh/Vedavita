@@ -1,4 +1,3 @@
-// lib/screens/upload_success_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vedavita/providers/image_provider.dart';
@@ -10,6 +9,19 @@ class UploadSuccessScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Get upload response from state
     final uploadState = ref.watch(imageUploadProvider);
+    
+    // If response is null, it might mean we navigated here incorrectly
+    if (uploadState.response == null || !uploadState.response!.success) {
+      // Handle this edge case - return to previous screen after a short delay
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('No valid upload data found')),
+          );
+          Navigator.of(context).pop();
+        }
+      });
+    }
     
     return Scaffold(
       appBar: AppBar(
@@ -56,26 +68,13 @@ class UploadSuccessScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // You can display any relevant response data here
-                    if (uploadState.response!.success) ...[
-                      const SizedBox(height: 8),
-                      const Text('Image URL:'),
-                      const SizedBox(height: 4),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          "Nk",
-                          // uploadState.response.data,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ),
-                    ],
+                    // Display response data
+                    const Text('Image details:', style: TextStyle(fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 8),
+                    Text(
+                      uploadState.response?.data.toString() ?? 'No additional data',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ],
                 ),
               ),

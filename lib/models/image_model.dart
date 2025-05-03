@@ -6,7 +6,7 @@ class PostResponseModel {
 
   PostResponseModel({
     required this.statusCode,
-    required this.data,
+    this.data,
     required this.message,
     required this.success,
   });

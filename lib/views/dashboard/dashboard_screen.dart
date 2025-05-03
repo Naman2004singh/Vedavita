@@ -29,7 +29,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             scale: 1,
           )),
       body: ListView(
-        children: [const DashboardAppbar(), HealthMatric()],
+        children: [
+          const DashboardAppbar(),
+          const HealthMatric(),
+          Image.asset(
+            "assets/images/nnn.png",
+            scale: 1.5,
+          ),
+        ],
       ),
     );
   }

@@ -1,9 +1,10 @@
+// lib/views/image_analysier/image_analyse.dart
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vedavita/providers/image_provider.dart';
-import 'package:vedavita/views/image%20analysier/widgets/image_upload_success.dart';
+import 'package:vedavita/views/Image%20analysier/widgets/image_upload_success.dart';
 
 class ImageAnalyse extends ConsumerStatefulWidget {
   const ImageAnalyse({super.key});
@@ -13,17 +14,38 @@ class ImageAnalyse extends ConsumerStatefulWidget {
 }
 
 class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
+  File? _imageFile;
+  bool _disposed = false;
+
   @override
   void initState() {
     super.initState();
     // Reset state when screen is first loaded
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(imageUploadProvider.notifier).resetState();
+      if (!_disposed) {
+        ref.read(imageUploadProvider.notifier).resetState();
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    _clearImageFile();
+    super.dispose();
+  }
+
+  // Clear image file to prevent memory leaks
+  void _clearImageFile() {
+    if (_imageFile != null) {
+      _imageFile = null;
+    }
   }
 
   // Show image selection options (camera or gallery)
   Future<void> _showImageSelect() async {
+    if (_disposed) return;
+    
     showModalBottomSheet(
       context: context,
       builder: (context) => SafeArea(
@@ -53,14 +75,17 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
 
   // Pick image from the specified source (gallery or camera)
   Future<void> _getImage(ImageSource source) async {
+    if (_disposed) return;
+    
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(
       source: source,
       imageQuality: 80, // Optional: reduce image quality to save bandwidth
     );
 
-    if (image != null) {
-      ref.read(imageUploadProvider.notifier).setImage(File(image.path));
+    if (image != null && !_disposed) {
+      _imageFile = File(image.path);
+      ref.read(imageUploadProvider.notifier).setImage(_imageFile!);
     }
   }
 
@@ -72,6 +97,8 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
     ref.listen<ImageUploadState>(
       imageUploadProvider,
       (previous, current) {
+        if (_disposed) return;
+        
         if (current.errorMessage != null &&
             previous?.errorMessage != current.errorMessage) {
           // Show error message if any
@@ -80,12 +107,17 @@ class _ImageUploadScreenState extends ConsumerState<ImageAnalyse> {
           );
         }
 
-        if (current.response?.success == true) {
-          // Navigate to success screen if image upload was successful
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const UploadSuccessScreen()),
-          );
+        // Explicitly check for success response and navigate
+        if (current.response != null && current.response!.success == true) {
+          // Use Future.microtask to avoid build-phase navigation issues
+          Future.microtask(() {
+            if (!_disposed && context.mounted) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const UploadSuccessScreen()),
+              );
+            }
+          });
         }
       },
     );

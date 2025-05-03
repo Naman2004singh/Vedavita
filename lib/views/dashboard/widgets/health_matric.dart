@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vedavita/config/components/custom_container.dart';
-import 'package:vedavita/utils/app_colors.dart';
+// import 'package:vedavita/config/components/custom_container.dart';
+// import 'package:vedavita/utils/app_colors.dart';
 import 'package:vedavita/utils/app_constants.dart';
 import 'package:vedavita/utils/app_textstyle.dart';
 import 'package:vedavita/views/dashboard/widgets/heart/heart_dahboard.dart';

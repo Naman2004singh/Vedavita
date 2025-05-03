@@ -71,9 +71,9 @@ class DashboardAppbar extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Hello',
+                          Text('Hello, Parikshit',
                               // ${user.name}
-                              style: AppTextstyle.headingLargeW),
+                              style: AppTextstyle.headingMediumW),
                           const SizedBox(height: 4),
                           Row(
                             children: [
@@ -86,7 +86,7 @@ class DashboardAppbar extends ConsumerWidget {
                               const SizedBox(width: 4),
                               Text(
                                 // '${healthMetrics.heartRate} bpm',
-                                'bpm',
+                                '86 bpm',
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.white70,
