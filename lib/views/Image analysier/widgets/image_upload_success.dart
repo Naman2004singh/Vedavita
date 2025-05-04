@@ -7,12 +7,10 @@ class UploadSuccessScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Get upload response from state
     final uploadState = ref.watch(imageUploadProvider);
     
     // If response is null, it might mean we navigated here incorrectly
     if (uploadState.response == null || !uploadState.response!.success) {
-      // Handle this edge case - return to previous screen after a short delay
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(

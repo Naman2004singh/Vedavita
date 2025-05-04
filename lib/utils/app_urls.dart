@@ -1,26 +1,31 @@
 class AppUrls {
-  static const registerUrl =
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/user/register";
-  static const loginUrl =
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/user/login";
-  static const googleAuthUrl =
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/user/google-login";
-  static const logoutUrl =
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/user/logout";
-  static const getUserDetailUrl =
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/user/get-user";
-  static const chatbotUrl =
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/chatBot";
-  static const uploadImageUrl =
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/ml/scan-image";
+  // base url
+  static const baseUrl = "https://vedavite-backend-vrgl.onrender.com/api/v1/";
 
-  
-  static const heratRateUrl = 
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/parameters/heart-rate";
+
+  // auth urls
+  static const registerUrl =
+      "${baseUrl}user/register";
+  static const loginUrl =
+      "${baseUrl}user/login";
+  static const googleAuthUrl =
+      "${baseUrl}user/google-login";
+  static const logoutUrl =
+      "${baseUrl}user/logout";
+  static const getUserDetailUrl =
+      "${baseUrl}user/get-user";
+
+  //app urls
+  static const chatbotUrl =
+      "${baseUrl}chatBot";
+  static const uploadImageUrl =
+      "${baseUrl}ml/scan-image";
+  static const heartRateUrl = 
+      "${baseUrl}parameters/heart-rate";
   static const temperatureUrl = 
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/parameters/temperature";
+      "${baseUrl}parameters/temperature";
   static const bloodPressureUrl = 
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/parameters/blood-pressure";
-    static const spo2Url = 
-      "https://vedavite-backend-vrgl.onrender.com/api/v1/parameters/oxygen-saturation";
+      "${baseUrl}parameters/blood-pressure";
+  static const spo2Url = 
+      "${baseUrl}parameters/oxygen-saturation";
   }

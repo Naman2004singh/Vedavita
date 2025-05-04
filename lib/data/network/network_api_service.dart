@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:vedavita/data/exception/app_exceptions.dart';
 import 'package:vedavita/data/network/base_api_service.dart';
 import 'package:http/http.dart' as http;
@@ -14,12 +13,14 @@ class NetworkApiService extends BaseApiService {
     dynamic jsonResponse;
 
     try {
-       final token = await TokenStorage.getAccessToken();
-      final response =
-          await http.get(Uri.parse(url), headers: {
+      final token = await TokenStorage.getAccessToken();
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
-        },).timeout(const Duration(seconds: 50));
+        },
+      ).timeout(const Duration(seconds: 50));
       jsonResponse = returnResponse(response);
     } on SocketException {
       throw NoInternetException('message');
@@ -50,7 +51,7 @@ class NetworkApiService extends BaseApiService {
           jsonResponse['accessToken'],
           jsonResponse['refreshToken'],
         );
-        print("jsonResponse :${jsonResponse}");
+        // print("jsonResponse :${jsonResponse}");
       }
     } on SocketException {
       throw NoInternetException('message');

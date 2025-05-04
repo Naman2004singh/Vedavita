@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:vedavita/data/network/network_api_service.dart';
 import 'package:vedavita/data/network/token_storage.dart';
 import 'package:vedavita/models/auth/login_model.dart';
@@ -31,7 +30,7 @@ class Repository {
         dataField.accessToken!,
         dataField.refreshToken!,
       );
-      print("loginResponse: $loginResponse");
+      // print("loginResponse: $loginResponse");
     }
 
     return loginResponse;
@@ -57,10 +56,10 @@ class Repository {
 
   // get heart rate data
   Future<HeartRateResponse> getHeartRateData() async {
-    final response = await _api.getApi(AppUrls.heratRateUrl);
+    final response = await _api.getApi(AppUrls.heartRateUrl);
 
     final heartRateResponse = HeartRateResponse.fromJson(response);
-    print(heartRateResponse);
+    // print(heartRateResponse);
     return heartRateResponse;
   }
 }
