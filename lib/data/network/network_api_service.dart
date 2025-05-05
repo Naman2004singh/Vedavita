@@ -87,12 +87,11 @@ class NetworkApiService extends BaseApiService {
         await http.MultipartFile.fromPath(
           'image',
           imageFile.path,
-          // ContentType(
-          //   'image',
-          //   fileExtension,
-          // ),
         ),
       );
+
+
+      request.fields['description'] = 'Image upload';
 
       print('Request headers: ${request.headers}');
 

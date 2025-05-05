@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vedavita/providers/auth_provider.dart';
 import 'package:vedavita/utils/app_colors.dart';
 import 'package:vedavita/utils/app_constants.dart';
 import 'package:vedavita/utils/app_textstyle.dart';
@@ -12,7 +13,21 @@ class GoogleButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () async{
+         try {
+      final result = await ref.read(googleAuthFlowProvider.future);
+      print('Success: $result');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Google Sign-In Successful')),
+      );
+    } catch (e) {
+      print('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Google Sign-In Failed: $e')),
+      );
+    }
+      },
       child: Container(
         width: googlebtnWidth,
         padding: const EdgeInsets.symmetric(vertical: 12.0),

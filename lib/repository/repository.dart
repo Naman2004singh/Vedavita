@@ -36,6 +36,12 @@ class Repository {
     return loginResponse;
   }
 
+  // google login api
+  Future<dynamic> googleAuth(String idToken) async{
+    final response = await _api.postApi(AppUrls.googleAuthUrl, {'idToken': idToken});
+    return response;
+  }
+
   Future<ChatResponseModel> sendMessage(String message) async {
     final response = await _api.postApi(
       AppUrls.chatbotUrl,
