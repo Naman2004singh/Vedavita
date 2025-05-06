@@ -25,7 +25,6 @@ final loginLodingProvider = StateProvider<bool>(
   (ref) => false,
 );
 
-
 // navigation provider of navigation bar
 final navigationProvider = StateProvider<int>((ref) => 0);
 
@@ -35,15 +34,12 @@ final navigationProvider = StateProvider<int>((ref) => 0);
 
 final googleAuthServiceProvider = Provider((ref) => GoogleAuthService());
 
-
 final googleAuthRepositoryProvider = Provider((ref) {
   return (String token) async {
     final response = await Repository().googleAuth(token);
     return response;
   };
 });
-
-
 
 final googleAuthFlowProvider = FutureProvider((ref) async {
   final googleAuthService = ref.read(googleAuthServiceProvider);
@@ -53,9 +49,8 @@ final googleAuthFlowProvider = FutureProvider((ref) async {
   if (idToken == null) throw Exception('Google Sign-In failed');
 
   final response = await apiCall(idToken);
+  print(response);
+  print(idToken);
+
   return response;
 });
-
-
-
-

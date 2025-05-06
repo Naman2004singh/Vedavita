@@ -38,7 +38,7 @@ class Repository {
 
   // google login api
   Future<dynamic> googleAuth(String idToken) async{
-    final response = await _api.postApi(AppUrls.googleAuthUrl, {'idToken': idToken});
+    final response = await _api.postApi(AppUrls.googleAuthUrl, {"idToken": idToken});
     return response;
   }
 

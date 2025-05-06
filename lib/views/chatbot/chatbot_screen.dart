@@ -66,7 +66,7 @@ class ChatScreen extends ConsumerWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: LinearProgressIndicator(
-                minHeight: 3,
+                minHeight: 4,
                 color: AppColors.mainMediumColor,
                 backgroundColor: Colors.transparent,
               ),

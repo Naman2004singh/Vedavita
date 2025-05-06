@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vedavita/models/chat_message.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:vedavita/utils/app_colors.dart';
+import 'package:vedavita/utils/app_constants.dart';
 import 'package:vedavita/utils/app_textstyle.dart';
 
 class ChatBubble extends StatelessWidget {
@@ -14,11 +15,12 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth =  AppConstants.screenWidth(context);
     return Align(
       alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.75,
+          maxWidth:  screenWidth* 0.75,
         ),
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(12),
@@ -35,7 +37,7 @@ class ChatBubble extends StatelessWidget {
                     message.text,
                     style: AppTextstyle.text17W,
                   )
-                : MarkdownBody(
+                : MarkdownBody(  //this will structure the response of the chatbot
                     data: message.text,
                     styleSheet: MarkdownStyleSheet(
                       p: AppTextstyle.text17B,
@@ -45,7 +47,7 @@ class ChatBubble extends StatelessWidget {
                   ),
             const SizedBox(height: 4),
             Text(
-              _formatTime(message.timestamp),
+              formatTime(message.timestamp),
               style: TextStyle(
                 color: message.isUser ? Colors.white70 : Colors.black54,
                 fontSize: 12,
@@ -57,7 +59,7 @@ class ChatBubble extends StatelessWidget {
     );
   }
 
-  String _formatTime(DateTime dateTime) {
+  String formatTime(DateTime dateTime) {
     final hour = dateTime.hour.toString().padLeft(2, '0');
     final minute = dateTime.minute.toString().padLeft(2, '0');
     return '$hour:$minute';
