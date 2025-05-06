@@ -12,6 +12,13 @@ class AppTextstyle {
       fontSize: 21.0,
       fontWeight: FontWeight.w600,
       color: AppColors.whiteColor);
+      // with opacity
+  static TextStyle headingMediumWop = TextStyle(
+      fontFamily: " Manrope",
+      fontSize: 21.0,
+      fontWeight: FontWeight.w600,
+      color: AppColors.whiteColor.withOpacity(0.5),
+      );
   static const TextStyle headingSmallW = TextStyle(
       fontFamily: " Manrope",
       fontSize: 14.0,
