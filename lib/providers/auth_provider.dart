@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vedavita/providers/states/auth_state.dart';
-import 'package:vedavita/repository/google_auth_service.dart';
-import 'package:vedavita/repository/repository.dart';
+import 'package:vedavita/notifiers/auth_state.dart';
+import 'package:vedavita/data/network/google_auth_service.dart';
+import 'package:vedavita/repository/auth_repository.dart';
 
 // register
 final nameProvider = StateProvider<String?>(
@@ -39,17 +39,6 @@ final googleAuthRepositoryProvider = Provider((ref) {
     return response;
   };
 });
-
-// final googleAuthFlowProvider = FutureProvider((ref) async {
-//   final googleAuthService = ref.read(googleAuthServiceProvider);
-//   final apiCall = ref.read(googleAuthRepositoryProvider);
-
-//   final idToken = await googleAuthService.signInWithGoogle();
-//   if (idToken == null) throw Exception('Google Sign-In failed');
-
-//   final response = await apiCall(idToken);
-//   return response;
-// });
 
 // Create a StateNotifier to manage the authentication state
 class AuthNotifier extends StateNotifier<GoogleAuthState> {

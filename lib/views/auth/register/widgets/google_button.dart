@@ -26,7 +26,8 @@ class GoogleButton extends ConsumerWidget {
               if (authState.error != null) {
                 FlushBarHelper.flushBarErrorMessage(authState.error!, context);
               } else if (authState.userData != null) {
-                Navigator.pushReplacementNamed(context, RoutesName.dashboardScreen);
+                Navigator.pushReplacementNamed(
+                    context, RoutesName.navigationScreen);
                 FlushBarHelper.flushBarSuccessMessage(
                     "Google Sign In successful", context);
               }
@@ -46,9 +47,26 @@ class GoogleButton extends ConsumerWidget {
               width: AppConstants.sizedBox10,
             ),
             ref.watch(authNotifierProvider).isLoading
-                ? Text(
-                    "Continue with Google",
-                    style: AppTextstyle.headingMediumWop,
+                ? Row(
+                    children: [
+                      Text(
+                        "Please Wait...",
+                        style: AppTextstyle.headingMediumWop,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      const SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 4.0,
+                          backgroundColor: AppColors.whiteColor,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              AppColors.mainLightColor),
+                        ),
+                      )
+                    ],
                   )
                 : const Text(
                     "Continue with Google",

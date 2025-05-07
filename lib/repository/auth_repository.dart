@@ -1,10 +1,7 @@
-import 'dart:io';
 import 'package:vedavita/data/network/network_api_service.dart';
 import 'package:vedavita/data/network/token_storage.dart';
 import 'package:vedavita/models/auth/login_model.dart';
 import 'package:vedavita/models/auth/register_model.dart';
-import 'package:vedavita/models/chat_response_model.dart';
-import 'package:vedavita/models/heartRate/heart_rate_response.dart';
 import 'package:vedavita/utils/app_urls.dart';
 
 class Repository {
@@ -41,31 +38,5 @@ class Repository {
     final response = await _api.postApi(AppUrls.googleAuthUrl, {"idToken": idToken});
     return response;
   }
-
-  Future<ChatResponseModel> sendMessage(String message) async {
-    final response = await _api.postApi(
-      AppUrls.chatbotUrl,
-      {'text': message},
-    );
-    return ChatResponseModel.fromJson(response);
-  }
-
-  // image api
-  Future<ChatResponseModel> uploadImage(File imageFile) async {
-    final response = await _api.uploadImageOnly(
-      AppUrls.uploadImageUrl,
-      imageFile,
-    );
-
-    return ChatResponseModel.fromJson(response);
-  }
-
-  // get heart rate data
-  Future<HeartRateResponse> getHeartRateData() async {
-    final response = await _api.getApi(AppUrls.heartRateUrl);
-
-    final heartRateResponse = HeartRateResponse.fromJson(response);
-    // print(heartRateResponse);
-    return heartRateResponse;
-  }
+  
 }

@@ -4,7 +4,7 @@ import 'package:vedavita/config/components/flush_bar_helper.dart';
 import 'package:vedavita/config/routes/routes_name.dart';
 import 'package:vedavita/models/auth/register_model.dart';
 import 'package:vedavita/providers/auth_provider.dart';
-import 'package:vedavita/repository/repository.dart';
+import 'package:vedavita/repository/auth_repository.dart';
 import 'package:vedavita/utils/app_colors.dart';
 import 'package:vedavita/utils/app_constants.dart';
 import 'package:vedavita/utils/app_textstyle.dart';
