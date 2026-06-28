@@ -71,7 +71,7 @@ class DashboardAppbar extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Hello, Parikshit',
+                          Text('Hello, Naman',
                               // ${user.name}
                               style: AppTextstyle.headingMediumW),
                           const SizedBox(height: 4),
